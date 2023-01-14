@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>University_Recruitment</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityRecruitment.Domain\UniversityRecruitment.Domain.csproj" />
+    <ProjectReference Include="..\UniversityReqruitment.App\UniversityRecruitment.App.csproj" />
+  </ItemGroup>
+
+</Project>
