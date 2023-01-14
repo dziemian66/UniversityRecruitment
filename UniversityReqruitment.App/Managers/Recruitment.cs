@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace UniversityRecruitment.App.Managers
 {
-    public static class Recruitment
+    public static class Recruitment 
     {
-        const uint MIN_POLISZ_LANGUAGE_EXAM = 30; //Minimum result for polish exam
-        const uint MIN_MATH_EXAM = 30; //Minimum result for math exam
-        const uint MIN_FOREIGN_LANGUAGE_EXAM = 30; //Minimum result for foreign language exam
+        //Minimum result for...
+        const uint MIN_POLISZ_LANGUAGE_EXAM = 30; //polish exam
+        const uint MIN_MATH_EXAM = 30; //math exam
+        const uint MIN_FOREIGN_LANGUAGE_EXAM = 30; //foreign language exam
         public static float SumPoints(Dictionary<string, float> multipiers, Dictionary<string, float> examResults)
         {
             float sumPoints = 0;
