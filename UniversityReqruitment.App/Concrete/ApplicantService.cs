@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniversityRecruitment.App.Common;
 using UniversityRecruitment.Domain.Entity;
+using UniversityRecruitment.Domain.Utils;
 
 namespace UniversityRecruitment.App.Concrete
 {
@@ -19,6 +20,13 @@ namespace UniversityRecruitment.App.Concrete
         }
         public Applicant GetApplicantById(int id) => GetItemById(id);
 
-        public List<Applicant> GetAllApplicant() => GetAllItems();
+        public List<Applicant> GetAllApplicants() => GetAllItems();
+
+        public List<Applicant> GetApplicantsByFieldsOfStudy(Helpers.FieldsOfStudy fieldOfStudy)
+        {
+            List<Applicant> result = new();
+            result = Items.Where(a => a.FieldOfStudy == fieldOfStudy).ToList();           
+            return result;
+        }
     }
 }

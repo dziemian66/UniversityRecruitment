@@ -9,7 +9,7 @@ namespace UniversityRecruitment.App.Managers
     public static class Recruitment 
     {
         //Minimum result for...
-        const uint MIN_POLISZ_LANGUAGE_EXAM = 30; //polish exam
+        const uint MIN_POLISH_LANGUAGE_EXAM = 30; //polish exam
         const uint MIN_MATH_EXAM = 30; //math exam
         const uint MIN_FOREIGN_LANGUAGE_EXAM = 30; //foreign language exam
         public static float SumPoints(Dictionary<string, float> multipiers, Dictionary<string, float> examResults)
@@ -27,9 +27,9 @@ namespace UniversityRecruitment.App.Managers
             }
             return sumPoints;
         }
-        public static bool CheckPassMaturaExam(Dictionary<string, float> examResults)
+        public static bool CheckPassMatureExam(Dictionary<string, float> examResults)
         {
-            if(CheckPassExam("Basic Polish exam", examResults, MIN_POLISZ_LANGUAGE_EXAM) &&
+            if(CheckPassExam("Basic Polish exam", examResults, MIN_POLISH_LANGUAGE_EXAM) &&
                 CheckPassExam("Basic math exam", examResults, MIN_MATH_EXAM) &&
                 CheckPassExam("Basic foreign language exam", examResults, MIN_FOREIGN_LANGUAGE_EXAM))
             {
@@ -38,9 +38,6 @@ namespace UniversityRecruitment.App.Managers
 
            else
             {
-                Console.WriteLine("You cannot add applicant because of failed Matura exam" +
-                    "\nPress any key to continue...");
-                Console.ReadKey();
                 return false;
             }
         }

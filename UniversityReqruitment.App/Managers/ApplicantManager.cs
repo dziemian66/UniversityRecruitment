@@ -51,8 +51,11 @@ namespace UniversityRecruitment.App.Managers
             UInt32.TryParse(Console.ReadLine(), out value);
             applicant.ExamResults.Add("Basic foreign language exam", value);
 
-            if (!Recruitment.CheckPassMaturaExam(applicant.ExamResults))
+            if (!Recruitment.CheckPassMatureExam(applicant.ExamResults))
             {
+                Console.WriteLine("You cannot add applicant because of failed Matura exam" +
+                    "\nPress any key to continue...");
+                Console.ReadKey();
                 return;
             }
 
@@ -130,24 +133,19 @@ namespace UniversityRecruitment.App.Managers
         }
 
         public void ShowApplicantsForFieldOfStudy()
-        {
-            var applicants = _applicantService.GetAllApplicant();
+        {        
             Console.Write("Choose field of study:");
             _menuActionService.DisplayMenuActionsByMenuName("FieldsOfStudy");
-            int.TryParse(Console.ReadKey().KeyChar.ToString(), out var fieldOfStudy);
-
-            foreach(var applicant in applicants) 
+            int.TryParse(Console.ReadKey().KeyChar.ToString(), out var fieldOfStudy);          
+            foreach (var applicant in _applicantService.GetApplicantsByFieldsOfStudy((Helpers.FieldsOfStudy)fieldOfStudy))
             {
-                if (applicant.FieldOfStudy == (Helpers.FieldsOfStudy)fieldOfStudy)
-                {
-                    DisplayApplicantDetails(applicant);
-                }
+                DisplayApplicantDetails(applicant);
             }
             Console.ReadKey();
         }
         public void ShowEveryApplicants()
         {
-            var applicants = _applicantService.GetAllApplicant();
+            var applicants = _applicantService.GetAllApplicants();
             foreach (var applicant in applicants)
             {
                 DisplayApplicantDetails(applicant);
