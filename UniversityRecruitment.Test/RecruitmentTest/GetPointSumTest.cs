@@ -10,6 +10,7 @@ using Xunit;
 using UniversityRecruitment.App.Managers;
 using UniversityRecruitment.Domain.Entity;
 using UniversityRecruitment.Domain.Utils;
+using UniversityRecruitment.App.Concrete;
 
 namespace UniversityRecruitment.Test.RecruitmentTest
 {
@@ -23,17 +24,15 @@ namespace UniversityRecruitment.Test.RecruitmentTest
         {
             //Arrange
             float pointSum;
-            Applicant applicant = new Applicant(1, "Ola", "Fasola", "95050882102", fieldsOfStudy);
-            var examResults = new Dictionary<string, float>()
-            {
-                {"Basic Polish exam", 100f},
-                {"Basic math exam", 100f},
-                {"Basic foreign language exam", 100f},
-                {"Extended math exam", 100f},
-                {"Extended foreign language exam", 100f},
-                {"Extended physics exam", 0f}
-            };
-            applicant.ExamResults = examResults;
+            Item applicant = new Item(1, "Ola", "Fasola", "95050882102", fieldsOfStudy);
+            applicant.ExamResults = new List<MatureExam>() 
+                {new MatureExam(1, "Basic Polish", false, 100f),
+                new MatureExam(2, "Basic math", false, 100f),
+                new MatureExam(3, "Basic foreign languageh", false, 100f),
+                new MatureExam(4, "Extended math", true, 100f),
+                new MatureExam(5, "Extended foreign language", true, 100f),
+                new MatureExam(6, "Extended physics", true, 0f)};
+            
             //Act
             pointSum = Recruitment.SumPoints(FieldsOfStudyMultipliers.GetMultipliers(fieldsOfStudy), applicant.ExamResults);
 
@@ -49,17 +48,17 @@ namespace UniversityRecruitment.Test.RecruitmentTest
         {
             //Arrange
             float pointSum;
-            Applicant applicant = new Applicant(1, "Ola", "Fasola", "95050882102", fieldsOfStudy);
-            var examResults = new Dictionary<string, float>()
-            {
-                {"Basic Polish exam", 100f},
-                {"Basic math exam", 100f},
-                {"Basic foreign language exam", 100f},
-                {"Extended math exam", 100f},
-                {"Extended foreign language exam", 100f},
-                {"Extended physics exam", 0f}
-            };
-            applicant.ExamResults = examResults;
+            Item applicant = new Item(1, "Ola", "Fasola", "95050882102", fieldsOfStudy);
+            MatureExamService matureExamService = new MatureExamService();
+            var examResults = matureExamService.GetAllItems();
+            applicant.ExamResults = new List<MatureExam>()
+                {new MatureExam(1, "Basic Polish", false, 100f),
+                new MatureExam(2, "Basic math", false, 100f),
+                new MatureExam(3, "Basic foreign languageh", false, 100f),
+                new MatureExam(4, "Extended math", true, 100f),
+                new MatureExam(5, "Extended foreign language", true, 100f),
+                new MatureExam(6, "Extended physics", true, 0f)};
+
             //Act
             pointSum = Recruitment.SumPoints(FieldsOfStudyMultipliers.GetMultipliers(fieldsOfStudy), applicant.ExamResults);
             //Assert

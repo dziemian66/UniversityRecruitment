@@ -15,15 +15,15 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
     {
         void InitializeApplicantsList(ApplicantService _applicantService)
         {            
-            _applicantService.AddItem(new Applicant(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.Electrotechnics));
-            _applicantService.AddItem(new Applicant(2, "Kamil", "Prus", "92111112747", Helpers.FieldsOfStudy.Electrotechnics));
-            _applicantService.AddItem(new Applicant(3, "Michał", "Zieliński", "96112112642", Helpers.FieldsOfStudy.Electrotechnics));
-            _applicantService.AddItem(new Applicant(4, "Ula", "Wójcik", "9904112512", Helpers.FieldsOfStudy.Informatics));
-            _applicantService.AddItem(new Applicant(5, "Adam", "Kamiński", "9705112717", Helpers.FieldsOfStudy.Informatics));
-            _applicantService.AddItem(new Applicant(6, "Robert", "Lewandowski", "8902042163", Helpers.FieldsOfStudy.AutomiationAndRobotics));
-            _applicantService.AddItem(new Applicant(7, "Wojciech", "Wiśniewski", "9403015231", Helpers.FieldsOfStudy.AutomiationAndRobotics));
-            _applicantService.AddItem(new Applicant(8, "Adam", "Lul", "92030757341", Helpers.FieldsOfStudy.Informatics));
-            _applicantService.AddItem(new Applicant(9, "Karol", "Kokos", "96101018122", Helpers.FieldsOfStudy.Informatics));
+            _applicantService.AddItem(new Item(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.Electrotechnics));
+            _applicantService.AddItem(new Item(2, "Kamil", "Prus", "92111112747", Helpers.FieldsOfStudy.Electrotechnics));
+            _applicantService.AddItem(new Item(3, "Michał", "Zieliński", "96112112642", Helpers.FieldsOfStudy.Electrotechnics));
+            _applicantService.AddItem(new Item(4, "Ula", "Wójcik", "9904112512", Helpers.FieldsOfStudy.Informatics));
+            _applicantService.AddItem(new Item(5, "Adam", "Kamiński", "9705112717", Helpers.FieldsOfStudy.Informatics));
+            _applicantService.AddItem(new Item(6, "Robert", "Lewandowski", "8902042163", Helpers.FieldsOfStudy.AutomiationAndRobotics));
+            _applicantService.AddItem(new Item(7, "Wojciech", "Wiśniewski", "9403015231", Helpers.FieldsOfStudy.AutomiationAndRobotics));
+            _applicantService.AddItem(new Item(8, "Adam", "Lul", "92030757341", Helpers.FieldsOfStudy.Informatics));
+            _applicantService.AddItem(new Item(9, "Karol", "Kokos", "96101018122", Helpers.FieldsOfStudy.Informatics));
         }
         [Fact]
         public void GetAllApplicants_ListShouldContainAllElements()
@@ -31,12 +31,12 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
             //Arrange
             ApplicantService _applicantService = new ApplicantService();
             InitializeApplicantsList(_applicantService);
-            List<Applicant> applicantsList; 
+            List<Item> applicantsList; 
             //Act
             applicantsList = _applicantService.GetAllApplicants();
             //Assert
             applicantsList.Should().NotBeEmpty();
-            applicantsList.Should().AllBeOfType(typeof(Applicant));
+            applicantsList.Should().AllBeOfType(typeof(Item));
         }
         [Theory]
         [InlineData(2, Helpers.FieldsOfStudy.AutomiationAndRobotics)]
@@ -47,7 +47,7 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
             //Arrange
             ApplicantService _applicantService = new ApplicantService();
             InitializeApplicantsList(_applicantService);
-            List<Applicant> applicantsList;
+            List<Item> applicantsList;
             //Act
             applicantsList = _applicantService.GetApplicantsByFieldsOfStudy(fieldsOfStudy);
             //Assert
@@ -59,8 +59,8 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
         public void GetApplicantById_ShouldReturnCorrectApplicant()
         {
             //Arrange
-            Applicant returnedApplicant;
-            Applicant applicant = new Applicant(10, "Krzysztof", "Krawczyk", "98091017202", Helpers.FieldsOfStudy.Informatics);
+            Item returnedApplicant;
+            Item applicant = new Item(10, "Krzysztof", "Krawczyk", "98091017202", Helpers.FieldsOfStudy.Informatics);
             ApplicantService _applicantService = new ApplicantService();
             InitializeApplicantsList(_applicantService);
             _applicantService.AddItem(applicant);

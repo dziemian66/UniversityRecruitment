@@ -17,7 +17,7 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
         public void AddApplicant_ListShouldContainApplicant()
         {
             //Arrange
-            Applicant applicant = new Applicant(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
+            Item applicant = new Item(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
             ApplicantService _applicantService = new ApplicantService();
 
             //Act
@@ -25,14 +25,14 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
 
             //Assert
             Assert.NotEmpty(_applicantService.Items);
-            Assert.Contains<Applicant>(applicant, _applicantService.Items);
+            Assert.Contains<Item>(applicant, _applicantService.Items);
         }
 
         [Fact]
         public void AddApplicantAndGetId_IdShouldBeCorrect()
         {
             //Arrange
-            Applicant applicant = new Applicant(2, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
+            Item applicant = new Item(2, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
             ApplicantService _applicantService = new ApplicantService();
             int lastId;
             //Act
@@ -46,14 +46,14 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
         public void AddDifferentApplicant_ListShouldNotContainCorrectApplicant()
         {
             //Arrange
-            Applicant applicant = new Applicant(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
+            Item applicant = new Item(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
             ApplicantService _applicantService = new ApplicantService();
 
             //Act
-            _applicantService.AddItem(new Applicant(2, "Piotr", "Kowalewski", "99111112748", Helpers.FieldsOfStudy.AutomiationAndRobotics));
+            _applicantService.AddItem(new Item(2, "Piotr", "Kowalewski", "99111112748", Helpers.FieldsOfStudy.AutomiationAndRobotics));
 
             //Assert
-            Assert.DoesNotContain<Applicant>(applicant, _applicantService.Items);
+            Assert.DoesNotContain<Item>(applicant, _applicantService.Items);
         }
     }
 }

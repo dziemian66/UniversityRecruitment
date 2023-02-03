@@ -16,11 +16,11 @@ namespace UniversityRecruitment.Test.ApplicantServiceTest
         public void RemoveApplicant_ListShouldNotIncludesThisApplicant()
         {
             //Arrange
-            Applicant applicant = new Applicant(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
+            Item applicant = new Item(1, "Piotr", "Kowalski", "99111112747", Helpers.FieldsOfStudy.AutomiationAndRobotics);
             ApplicantService _applicantService = new ApplicantService();
 
             _applicantService.AddItem(applicant);
-            _applicantService.AddItem(new Applicant(2, "Kamil", "Kozłowski", "98061114103", Helpers.FieldsOfStudy.Electrotechnics));
+            _applicantService.AddItem(new Item(2, "Kamil", "Kozłowski", "98061114103", Helpers.FieldsOfStudy.Electrotechnics));
 
             //Act
             _applicantService.RemoveApplicant(1);

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniversityRecruitment.App.Concrete;
+using UniversityRecruitment.Domain.Entity;
 
 namespace UniversityRecruitment.App.Managers
 {
     public static class Recruitment 
     {
         //Minimum result for...
-        const uint MIN_POLISH_LANGUAGE_EXAM = 30; //polish exam
-        const uint MIN_MATH_EXAM = 30; //math exam
-        const uint MIN_FOREIGN_LANGUAGE_EXAM = 30; //foreign language exam
-        public static float SumPoints(Dictionary<string, float> multipiers, Dictionary<string, float> examResults)
+        const float MIN_POLISH_LANGUAGE_EXAM = 30; //Polish exam
+        const float MIN_MATH_EXAM = 30; //math exam
+        const float MIN_FOREIGN_LANGUAGE_EXAM = 30; //foreign language exam
+
+        public static float SumPoints(List<float> multipiers, List<MatureExam> examResults)
         {
             float sumPoints = 0;
 
@@ -23,15 +26,21 @@ namespace UniversityRecruitment.App.Managers
             }
             for (int i = 0; i < multipiers.Count; i++)
             {
-                sumPoints = sumPoints + multipiers.ElementAt(i).Value * examResults.ElementAt(i).Value;
+                sumPoints = sumPoints + multipiers.ElementAt(i) * examResults.ElementAt(i).Value;
             }
             return sumPoints;
         }
-        public static bool CheckPassMatureExam(Dictionary<string, float> examResults)
+        public static bool IsCorrectResults(List<MatureExam> examResults)
         {
-            if(CheckPassExam("Basic Polish exam", examResults, MIN_POLISH_LANGUAGE_EXAM) &&
-                CheckPassExam("Basic math exam", examResults, MIN_MATH_EXAM) &&
-                CheckPassExam("Basic foreign language exam", examResults, MIN_FOREIGN_LANGUAGE_EXAM))
+            return examResults.All(e => e.Value >= 0 & e.Value <= 100);
+        }
+        public static bool CheckPassMatureExam(List<MatureExam> examResults)
+        {
+            MatureExamService _matureExamService = new MatureExamService();
+
+            if (CheckPassExam(_matureExamService.GetItemById(1).Name, examResults, MIN_POLISH_LANGUAGE_EXAM) &&
+                CheckPassExam(_matureExamService.GetItemById(2).Name, examResults, MIN_MATH_EXAM) &&
+                CheckPassExam(_matureExamService.GetItemById(3).Name, examResults, MIN_FOREIGN_LANGUAGE_EXAM))
             {
                 return true;
             }
@@ -41,11 +50,11 @@ namespace UniversityRecruitment.App.Managers
                 return false;
             }
         }
-        private static bool CheckPassExam(string examName, Dictionary<string, float> examResults, uint minimumResult)
+        private static bool CheckPassExam(string examName, List<MatureExam> examResults, float minimumResult)
         {
             foreach (var result in examResults)
             {
-                if (result.Key == examName)
+                if (result.Name == examName)
                 {
                     if (result.Value >= minimumResult)
                     {

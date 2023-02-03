@@ -17,66 +17,49 @@ namespace UniversityRecruitment.Test.FieldsOfStudyMultipliersTest
         public void GetResultForAutomiationAndRobotics_ShouldReturnDifferentValues()
         {
             //Arrage
-            Dictionary<string, float> incorrectAutomiationAndRoboticsMultipliers = new Dictionary<string, float>() {
-                {"PolishBasic", 0f},
-                {"MathBasic", 0.8f},
-                {"ForeignLanguageBasic", 0.2f},
-                {"MathExtended", 2.0f},
-                {"ForeignLanguageExtended", 0.4f},
-                {"PhysicsExtended", 0f} //Different value
-            };
-            Dictionary<string, float> returnedMultipliers = new Dictionary<string, float>();
+            List<float> incorrectAutomiationAndRoboticsMultipliers = new List<float>()
+            {0, 0.8f, 0.2f, 2.0f, 0.4f,
+                                        0f}; //Different value
+            List<float> returnedMultipliers = new List<float>();
 
             //Act
             returnedMultipliers = FieldsOfStudyMultipliers.GetMultipliers(Helpers.FieldsOfStudy.AutomiationAndRobotics);
 
             //Assert
-            Assert.Equal(returnedMultipliers.Keys, incorrectAutomiationAndRoboticsMultipliers.Keys);
-            Assert.NotEqual(returnedMultipliers.Values, incorrectAutomiationAndRoboticsMultipliers.Values);
+            Assert.NotEqual(returnedMultipliers, incorrectAutomiationAndRoboticsMultipliers);
         }
 
         [Fact]
         public void GetResultForElectrotechnics_ShouldReturnDifferentValues()
         {
             //Arrage
-            Dictionary<string, float> incorrectElectrotechnicsMultipliers = new Dictionary<string, float>() {
-                {"PolishBasic", 0f},
-                {"MathBasic", 1.0f},
-                {"ForeignLanguageBasic", 0.2f},
-                {"MathExtended", 1.5f},
-                {"ForeignLanguageExtended", 0.5f},
-                {"PhysicsExtended", 0f} //Different value
-            };
-            Dictionary<string, float> returnedMultipliers = new Dictionary<string, float>();
-
+            List<float> incorrectElectrotechnicsMultipliers = new List<float>()
+            {0, 1.0f, 0.2f, 1.5f, 0.5f,
+                                     0f}; //Different value
+            List<float> returnedMultipliers = new List<float>();
+           
             //Act
             returnedMultipliers = FieldsOfStudyMultipliers.GetMultipliers(Helpers.FieldsOfStudy.Electrotechnics);
 
             //Assert     
-            Assert.Equal(returnedMultipliers.Keys, incorrectElectrotechnicsMultipliers.Keys);
-            Assert.NotEqual(returnedMultipliers.Values, incorrectElectrotechnicsMultipliers.Values);
+            Assert.NotEqual(returnedMultipliers, incorrectElectrotechnicsMultipliers);
         }
 
         [Fact]
         public void GetResultForInformatnics_ShouldReturnDifferentValues()
         {
             //Arrage
-            Dictionary<string, float> incorrectInformaticsMultipliers = new Dictionary<string, float>() {
-              {"PolishBasic", 0f},
-              {"MathBasic", 1.0f},
-              {"ForeignLanguageBasic", 0.7f},
-              {"MathExtended", 1.5f},
-              {"ForeignLanguageExtended", 1.3f},
-              {"PhysicsExtended", 0f} //Different value
-            };
-            Dictionary<string, float> returnedMultipliers = new Dictionary<string, float>();
+
+            List<float> incorrectInformaticsMultipliers = new List<float>()
+            {0, 1.0f, 0.7f, 1.5f, 1.3f,
+                                     0f}; //Different value
+            List<float> returnedMultipliers = new List<float>();
 
             //Act
             returnedMultipliers = FieldsOfStudyMultipliers.GetMultipliers(Helpers.FieldsOfStudy.Informatics);
 
             //Assert
-            Assert.Equal(returnedMultipliers.Keys, incorrectInformaticsMultipliers.Keys);
-            Assert.NotEqual(returnedMultipliers.Values, incorrectInformaticsMultipliers.Values);        
+            Assert.NotEqual(returnedMultipliers, incorrectInformaticsMultipliers);        
         }
     }
 }

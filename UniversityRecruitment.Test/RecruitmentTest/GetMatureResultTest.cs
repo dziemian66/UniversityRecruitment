@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniversityRecruitment.App.Concrete;
 using UniversityRecruitment.App.Managers;
 using UniversityRecruitment.Domain.Entity;
 using UniversityRecruitment.Domain.Utils;
@@ -24,10 +25,12 @@ namespace UniversityRecruitment.Test.RecruitmentTest
         public void GetResultForFailedMatureExam_ShouldReturnFalse(float mathExam, float polishExam, float foreignLanguage)
         {
             //Arrage
-            Applicant applicant = new Applicant(1, "Ola", "Fasola", "95050882102", Helpers.FieldsOfStudy.Informatics);
-            applicant.ExamResults.Add("Basic Polish exam", polishExam);
-            applicant.ExamResults.Add("Basic math exam", mathExam);
-            applicant.ExamResults.Add("Basic foreign language exam", foreignLanguage);
+            MatureExamService matureExamService = new MatureExamService();
+            Item applicant = new Item(1, "Ola", "Fasola", "95050882102", Helpers.FieldsOfStudy.Informatics);
+            applicant.ExamResults = matureExamService.GetAllItems();
+            applicant.ExamResults[1].Value = polishExam;
+            applicant.ExamResults[2].Value = mathExam;
+            applicant.ExamResults[3].Value = foreignLanguage;     
             bool maturePassed;
             //Act
             maturePassed = Recruitment.CheckPassMatureExam(applicant.ExamResults);
@@ -39,10 +42,12 @@ namespace UniversityRecruitment.Test.RecruitmentTest
         public void GetResultForPassedMatureExam_ShouldReturnTrue()
         {
             //Arrage
-            Applicant applicant = new Applicant(1, "Ola", "Fasola", "95050882102", Helpers.FieldsOfStudy.Informatics);
-            applicant.ExamResults.Add("Basic Polish exam", 30);
-            applicant.ExamResults.Add("Basic math exam", 30);
-            applicant.ExamResults.Add("Basic foreign language exam", 30);
+            MatureExamService matureExamService = new MatureExamService();
+            Item applicant = new Item(1, "Ola", "Fasola", "95050882102", Helpers.FieldsOfStudy.Informatics);
+            applicant.ExamResults = matureExamService.GetAllItems();
+            applicant.ExamResults[0].Value = 30; //minimal value for Polish exam
+            applicant.ExamResults[1].Value = 30; //minimal value for math exam
+            applicant.ExamResults[2].Value = 30; //minimal value for foreign language exam
             bool maturePassed;
             //Act
             maturePassed = Recruitment.CheckPassMatureExam(applicant.ExamResults);
